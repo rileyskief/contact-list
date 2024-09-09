@@ -15,7 +15,6 @@ import 'package:to_dont_list/widgets/to_do_items.dart';
 void main() {
   test('Item abbreviation should be first letter', () {
     const item = Item(name: "add more todos");
-    //spits out an extra letter
     expect(item.abbrev(), "a");
   });
 
@@ -46,7 +45,7 @@ void main() {
                 onListChanged: (Item item, bool completed) {},
                 onDeleteItem: (Item item) {}))));
     final abbvFinder = find.text('t');
-    //no widget with t is found?
+    //gets test instead of t
     final avatarFinder = find.byType(CircleAvatar);
 
     CircleAvatar circ = tester.firstWidget(avatarFinder);
@@ -55,6 +54,7 @@ void main() {
     // Use the `findsOneWidget` matcher provided by flutter_test to verify
     // that the Text widgets appear exactly once in the widget tree.
     expect(abbvFinder, findsOneWidget);
+    //wrong color?
     expect(circ.backgroundColor, Colors.black54);
     expect(ctext.data, "t");
   });
