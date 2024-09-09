@@ -15,6 +15,7 @@ import 'package:to_dont_list/widgets/to_do_items.dart';
 void main() {
   test('Item abbreviation should be first letter', () {
     const item = Item(name: "add more todos");
+    //spits out an extra letter
     expect(item.abbrev(), "a");
   });
 
@@ -32,6 +33,7 @@ void main() {
     // Use the `findsOneWidget` matcher provided by flutter_test to verify
     // that the Text widgets appear exactly once in the widget tree.
     expect(textFinder, findsOneWidget);
+    //no output?
   });
 
   testWidgets('ToDoListItem has a Circle Avatar with abbreviation',
@@ -44,6 +46,7 @@ void main() {
                 onListChanged: (Item item, bool completed) {},
                 onDeleteItem: (Item item) {}))));
     final abbvFinder = find.text('t');
+    //no widget with t is found?
     final avatarFinder = find.byType(CircleAvatar);
 
     CircleAvatar circ = tester.firstWidget(avatarFinder);
@@ -62,6 +65,7 @@ void main() {
     final listItemFinder = find.byType(ToDoListItem);
 
     expect(listItemFinder, findsOneWidget);
+    //no output?
   });
 
   testWidgets('Clicking and Typing adds item to ToDoList', (tester) async {
@@ -69,6 +73,7 @@ void main() {
 
     expect(find.byType(TextField), findsNothing);
 
+    //no "okay" button to tap?
     await tester.tap(find.byType(FloatingActionButton));
     await tester.pump(); // Pump after every action to rebuild the widgets
     expect(find.text("hi"), findsNothing);

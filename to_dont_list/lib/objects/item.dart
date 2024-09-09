@@ -6,6 +6,7 @@ class Item {
   final String name;
 
   String abbrev() {
-    return name.substring(0, 2);
+    //adjusted to spit out just one character
+    return name.substring(0, 1);
   }
 }
