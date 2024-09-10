@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 typedef ToDoListAddedCallback = Function(
-    String value, TextEditingController textConroller);
+    String value, TextEditingController textController);
 
 class ToDoDialog extends StatefulWidget {
   const ToDoDialog({
@@ -39,10 +39,11 @@ class _ToDoDialogState extends State<ToDoDialog> {
         decoration: const InputDecoration(hintText: "type something here"),
       ),
       actions: <Widget>[
+        //not sure why this isn't working
         ElevatedButton(
-          key: const Key("OkButton"),
-          style: yesStyle,
-          child: const Text('OK'),
+          key: const Key("CancelButton"),
+          style: noStyle,
+          child: const Text('Cancel'),
           onPressed: () {
             setState(() {
               Navigator.pop(context);
@@ -54,18 +55,19 @@ class _ToDoDialogState extends State<ToDoDialog> {
         ValueListenableBuilder<TextEditingValue>(
           valueListenable: _inputController,
           builder: (context, value, child) {
+            //not sure why this isn't working either
             return ElevatedButton(
-              key: const Key("CancelButton"),
-              style: noStyle,
+              key: const Key("OKButton"),
+              style: yesStyle,
               onPressed: value.text.isNotEmpty
                   ? () {
                       setState(() {
-                        widget.onListAdded(valueText, _inputController);
+                        widget.onListAdded(value.text, _inputController);
                         Navigator.pop(context);
                       });
                     }
                   : null,
-              child: const Text('Cancel'),
+              child: const Text('OK'),
             );
           },
         ),

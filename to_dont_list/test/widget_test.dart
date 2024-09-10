@@ -32,7 +32,6 @@ void main() {
     // Use the `findsOneWidget` matcher provided by flutter_test to verify
     // that the Text widgets appear exactly once in the widget tree.
     expect(textFinder, findsOneWidget);
-    //no output?
   });
 
   testWidgets('ToDoListItem has a Circle Avatar with abbreviation',
@@ -65,7 +64,6 @@ void main() {
     final listItemFinder = find.byType(ToDoListItem);
 
     expect(listItemFinder, findsOneWidget);
-    //no output?
   });
 
   testWidgets('Clicking and Typing adds item to ToDoList', (tester) async {
@@ -73,7 +71,6 @@ void main() {
 
     expect(find.byType(TextField), findsNothing);
 
-    //no "okay" button to tap?
     await tester.tap(find.byType(FloatingActionButton));
     await tester.pump(); // Pump after every action to rebuild the widgets
     expect(find.text("hi"), findsNothing);
@@ -81,9 +78,9 @@ void main() {
     await tester.enterText(find.byType(TextField), 'hi');
     await tester.pump();
     expect(find.text("hi"), findsOneWidget);
-
     await tester.tap(find.byKey(const Key("OKButton")));
     await tester.pump();
+    //error on this line, not sure why
     expect(find.text("hi"), findsOneWidget);
 
     final listItemFinder = find.byType(ToDoListItem);
