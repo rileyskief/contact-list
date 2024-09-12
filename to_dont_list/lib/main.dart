@@ -12,6 +12,7 @@ class ToDoList extends StatefulWidget {
 }
 
 class _ToDoListState extends State<ToDoList> {
+  //no longer const, stuff gets changed and added
   final List<Item> items = [const Item(name: "add more todos")];
   final _itemSet = <Item>{};
 
@@ -43,9 +44,11 @@ class _ToDoListState extends State<ToDoList> {
     });
   }
 
+  //add in color to interact with
   void _handleNewItem(String itemText, TextEditingController textController) {
     setState(() {
       print("Adding new item");
+      //add color
       Item item = Item(name: itemText);
       items.insert(0, item);
       textController.clear();
@@ -87,3 +90,8 @@ void main() {
     home: ToDoList(),
   ));
 }
+
+//todo list with dogs, tracking owners and dogs seen on campus
+//use dogs instead of items, convert to stateful widget, downdrop appears, color changes
+//change items in to do items to dogs, change import to use dog instead of item
+//get color from material.dart, make enum for collar color? (name(Colors.colorname) or Color.fromARGB)

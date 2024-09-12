@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 typedef ToDoListAddedCallback = Function(
-    String value, TextEditingController textController);
+    //add color
+    String value,
+    TextEditingController textController);
 
 class ToDoDialog extends StatefulWidget {
   const ToDoDialog({
@@ -29,6 +31,7 @@ class _ToDoDialogState extends State<ToDoDialog> {
   Widget build(BuildContext context) {
     return AlertDialog(
       title: const Text('Item To Add'),
+      //make column to add more stuff, so after textfield another button/icon/whatever can be placed (drop down collar color option?)
       content: TextField(
         onChanged: (value) {
           setState(() {
@@ -62,6 +65,7 @@ class _ToDoDialogState extends State<ToDoDialog> {
               onPressed: value.text.isNotEmpty
                   ? () {
                       setState(() {
+                        //add color here too
                         widget.onListAdded(value.text, _inputController);
                         Navigator.pop(context);
                       });

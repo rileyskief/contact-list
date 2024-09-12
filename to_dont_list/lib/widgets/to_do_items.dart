@@ -50,6 +50,7 @@ class ToDoListItem extends StatelessWidget {
               onDeleteItem(item);
             }
           : null,
+      //circle avatar can be replaced by button or icon, if onPressed is used for button call setState() (must be stateful widget)
       leading: CircleAvatar(
         backgroundColor: _getColor(context),
         //switched item.name with .abbrev
