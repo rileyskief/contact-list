@@ -1,6 +1,6 @@
 // Started with https://docs.flutter.dev/development/ui/widgets-intro
 import 'package:flutter/material.dart';
-import 'package:to_dont_list/objects/item.dart';
+import 'package:to_dont_list/objects/dog.dart';
 import 'package:to_dont_list/widgets/to_do_items.dart';
 import 'package:to_dont_list/widgets/to_do_dialog.dart';
 
@@ -13,10 +13,10 @@ class ToDoList extends StatefulWidget {
 
 class _ToDoListState extends State<ToDoList> {
   //no longer const, stuff gets changed and added
-  final List<Item> items = [const Item(name: "add more todos")];
-  final _itemSet = <Item>{};
+  final List<Dog> items = [Dog(name: "add dogs")];
+  final _itemSet = <Dog>{};
 
-  void _handleListChanged(Item item, bool completed) {
+  void _handleListChanged(Dog item, bool completed) {
     setState(() {
       // When a user changes what's in the list, you need
       // to change _itemSet inside a setState call to
@@ -37,7 +37,7 @@ class _ToDoListState extends State<ToDoList> {
     });
   }
 
-  void _handleDeleteItem(Item item) {
+  void _handleDeleteItem(Dog item) {
     setState(() {
       print("Deleting item");
       items.remove(item);
@@ -49,7 +49,7 @@ class _ToDoListState extends State<ToDoList> {
     setState(() {
       print("Adding new item");
       //add color
-      Item item = Item(name: itemText);
+      Dog item = Dog(name: itemText);
       items.insert(0, item);
       textController.clear();
     });
@@ -91,7 +91,7 @@ void main() {
   ));
 }
 
-//todo list with dogs, tracking owners and dogs seen on campus
+//todo list with dogs, tracking dogs seen on campus
 //use dogs instead of items, convert to stateful widget, downdrop appears, color changes
 //change items in to do items to dogs, change import to use dog instead of item
 //get color from material.dart, make enum for collar color? (name(Colors.colorname) or Color.fromARGB)

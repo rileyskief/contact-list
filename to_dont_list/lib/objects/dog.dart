@@ -1,6 +1,5 @@
 class Dog {
-  const Dog({required this.name, required this.breed});
+  const Dog({required this.name});
 
   final String name;
-  final String breed;
 }
