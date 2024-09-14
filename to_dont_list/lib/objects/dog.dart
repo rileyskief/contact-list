@@ -1,5 +1,10 @@
 class Dog {
-  const Dog({required this.name});
+  Dog({required this.name});
 
   final String name;
+  int count = 1;
+
+  void encounter() {
+    count++;
+  }
 }

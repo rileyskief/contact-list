@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:to_dont_list/main.dart';
+import 'package:to_dont_list/objects/dog.dart';
 import 'package:to_dont_list/objects/item.dart';
 import 'package:to_dont_list/widgets/to_do_items.dart';
 
@@ -23,10 +24,10 @@ void main() {
     await tester.pumpWidget(MaterialApp(
         home: Scaffold(
             body: ToDoListItem(
-                item: const Item(name: "test"),
+                item: const Dog(name: "test"),
                 completed: true,
-                onListChanged: (Item item, bool completed) {},
-                onDeleteItem: (Item item) {}))));
+                onListChanged: (Dog item, bool completed) {},
+                onDeleteItem: (Dog item) {}))));
     final textFinder = find.text('test');
 
     // Use the `findsOneWidget` matcher provided by flutter_test to verify
@@ -39,12 +40,12 @@ void main() {
     await tester.pumpWidget(MaterialApp(
         home: Scaffold(
             body: ToDoListItem(
-                item: const Item(name: "test"),
+                item: const Dog(name: "test"),
                 completed: true,
-                onListChanged: (Item item, bool completed) {},
-                onDeleteItem: (Item item) {}))));
+                onListChanged: (Dog item, bool completed) {},
+                onDeleteItem: (Dog item) {}))));
+    //doesn't abbreviate anymore, redundant
     final abbvFinder = find.text('t');
-    //gets test instead of t
     final avatarFinder = find.byType(CircleAvatar);
 
     CircleAvatar circ = tester.firstWidget(avatarFinder);
@@ -53,7 +54,6 @@ void main() {
     // Use the `findsOneWidget` matcher provided by flutter_test to verify
     // that the Text widgets appear exactly once in the widget tree.
     expect(abbvFinder, findsOneWidget);
-    //wrong color?
     expect(circ.backgroundColor, Colors.black54);
     expect(ctext.data, "t");
   });
@@ -80,7 +80,7 @@ void main() {
     expect(find.text("hi"), findsOneWidget);
     await tester.tap(find.byKey(const Key("OKButton")));
     await tester.pump();
-    //error on this line, not sure why
+
     expect(find.text("hi"), findsOneWidget);
 
     final listItemFinder = find.byType(ToDoListItem);

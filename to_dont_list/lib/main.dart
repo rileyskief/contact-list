@@ -63,10 +63,10 @@ class _ToDoListState extends State<ToDoList> {
         ),
         body: ListView(
           padding: const EdgeInsets.symmetric(vertical: 8.0),
-          children: items.map((item) {
-            return ToDoListItem(
-              item: item,
-              completed: _itemSet.contains(item),
+          children: items.map((dog) {
+            return DogListItem(
+              dog: dog,
+              completed: _itemSet.contains(dog),
               onListChanged: _handleListChanged,
               onDeleteItem: _handleDeleteItem,
             );
