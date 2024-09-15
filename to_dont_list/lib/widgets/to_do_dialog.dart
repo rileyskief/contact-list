@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:to_dont_list/objects/dog.dart';
 
 typedef ToDoListAddedCallback = Function(
     //add color
     String value,
+    CollarColor collarColor,
     TextEditingController textController);
 
 class ToDoDialog extends StatefulWidget {
@@ -26,20 +28,36 @@ class _ToDoDialogState extends State<ToDoDialog> {
       textStyle: const TextStyle(fontSize: 20), backgroundColor: Colors.red);
 
   String valueText = "";
+  CollarColor collarColor = CollarColor.colorChoice;
 
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
       title: const Text('Item To Add'),
       //make column to add more stuff, so after textfield another button/icon/whatever can be placed (drop down collar color option?)
-      content: TextField(
-        onChanged: (value) {
-          setState(() {
-            valueText = value;
-          });
-        },
-        controller: _inputController,
-        decoration: const InputDecoration(hintText: "type something here"),
+      content: Column(
+        children: [
+          TextField(
+            onChanged: (value) {
+              setState(() {
+                valueText = value;
+              });
+            },
+            controller: _inputController,
+            decoration: const InputDecoration(hintText: "type something here"),
+          ),
+          DropdownButton<CollarColor>(
+              value: collarColor,
+              onChanged: (CollarColor? newValue) {
+                setState(() {
+                  collarColor = newValue!;
+                });
+              },
+              items: CollarColor.values.map((CollarColor classType) {
+                return DropdownMenuItem<CollarColor>(
+                    value: classType, child: Text(classType.name));
+              }).toList())
+        ],
       ),
       actions: <Widget>[
         //not sure why this isn't working
@@ -66,7 +84,8 @@ class _ToDoDialogState extends State<ToDoDialog> {
                   ? () {
                       setState(() {
                         //add color here too
-                        widget.onListAdded(value.text, _inputController);
+                        widget.onListAdded(
+                            value.text, collarColor, _inputController);
                         Navigator.pop(context);
                       });
                     }

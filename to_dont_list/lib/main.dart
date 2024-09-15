@@ -13,7 +13,7 @@ class ToDoList extends StatefulWidget {
 
 class _ToDoListState extends State<ToDoList> {
   //no longer const, stuff gets changed and added
-  final List<Dog> items = [Dog(name: "add dogs")];
+  final List<Dog> items = [Dog(name: "Fido", collar: CollarColor.red)];
   final _itemSet = <Dog>{};
 
   void _handleListChanged(Dog item, bool completed) {
@@ -45,11 +45,12 @@ class _ToDoListState extends State<ToDoList> {
   }
 
   //add in color to interact with
-  void _handleNewItem(String itemText, TextEditingController textController) {
+  void _handleNewItem(String itemText, CollarColor collarColor,
+      TextEditingController textController) {
     setState(() {
       print("Adding new item");
       //add color
-      Dog item = Dog(name: itemText);
+      Dog item = Dog(name: itemText, collar: collarColor);
       items.insert(0, item);
       textController.clear();
     });
@@ -59,7 +60,7 @@ class _ToDoListState extends State<ToDoList> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text('To Do List'),
+          title: const Text('To Dog List'),
         ),
         body: ListView(
           padding: const EdgeInsets.symmetric(vertical: 8.0),

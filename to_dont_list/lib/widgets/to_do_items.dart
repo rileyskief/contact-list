@@ -57,15 +57,13 @@ class _DogListItemState extends State<DogListItem> {
           : null,
       //circle avatar can be replaced by button or icon, if onPressed is used for button call setState() (must be stateful widget)
       leading: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          backgroundColor: const Color.fromARGB(
-              255, 76, 244, 54), //user input determine collar color
-        ),
         onPressed: () {
           setState(() {
             widget.dog.encounter();
           });
         },
+        style:
+            ElevatedButton.styleFrom(backgroundColor: widget.dog.collar.color),
         child: Text(widget.dog.count.toString()),
       ),
       title: Text(
