@@ -12,8 +12,8 @@ class ToDoList extends StatefulWidget {
 }
 
 class _ToDoListState extends State<ToDoList> {
-  //no longer const, stuff gets changed and added
-  final List<Dog> items = [Dog(name: "Fido", collar: CollarColor.red)];
+
+  final List<Dog> items = [Dog(name: "Fido", collar: CollarColor.red, breed: "beagle")];
   final _itemSet = <Dog>{};
 
   void _handleListChanged(Dog item, bool completed) {
@@ -44,13 +44,13 @@ class _ToDoListState extends State<ToDoList> {
     });
   }
 
-  //add in color to interact with
-  void _handleNewItem(String itemText, CollarColor collarColor,
+  
+  void _handleNewItem(String itemText, CollarColor collarColor, String breed,
       TextEditingController textController) {
     setState(() {
       print("Adding new item");
-      //add color
-      Dog item = Dog(name: itemText, collar: collarColor);
+      
+      Dog item = Dog(name: itemText, collar: collarColor, breed: breed);
       items.insert(0, item);
       textController.clear();
     });
@@ -87,7 +87,7 @@ class _ToDoListState extends State<ToDoList> {
 
 void main() {
   runApp(const MaterialApp(
-    title: 'To Do List',
+    title: 'To Dog List',
     home: ToDoList(),
   ));
 }

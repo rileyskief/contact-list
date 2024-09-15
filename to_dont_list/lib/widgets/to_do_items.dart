@@ -29,10 +29,7 @@ class _DogListItemState extends State<DogListItem> {
     // The BuildContext indicates where the build is
     // taking place and therefore which theme to use.
 
-    return widget.completed
-        // color adjusted from black to black 54
-        ? Colors.black54
-        : Theme.of(context).primaryColor;
+    return widget.completed ? Colors.black54 : Theme.of(context).primaryColor;
   }
 
   TextStyle? _getTextStyle(BuildContext context) {
@@ -66,9 +63,18 @@ class _DogListItemState extends State<DogListItem> {
             ElevatedButton.styleFrom(backgroundColor: widget.dog.collar.color),
         child: Text(widget.dog.count.toString()),
       ),
-      title: Text(
-        widget.dog.name,
-        style: _getTextStyle(context),
+      title: Row(
+        children: [
+          Text(
+            "Name: ${widget.dog.name},",
+            style: _getTextStyle(context),
+          ),
+          const SizedBox(width: 10),
+          Text(
+            "Breed: ${widget.dog.breed}",
+            style: _getTextStyle(context),
+          )
+        ],
       ),
     );
   }

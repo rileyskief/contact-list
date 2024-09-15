@@ -5,6 +5,7 @@ typedef ToDoListAddedCallback = Function(
     //add color
     String value,
     CollarColor collarColor,
+    String breed,
     TextEditingController textController);
 
 class ToDoDialog extends StatefulWidget {
@@ -22,13 +23,15 @@ class ToDoDialog extends StatefulWidget {
 class _ToDoDialogState extends State<ToDoDialog> {
   // Dialog with text from https://www.appsdeveloperblog.com/alert-dialog-with-a-text-field-in-flutter/
   final TextEditingController _inputController = TextEditingController();
+  final TextEditingController _breedController = TextEditingController();
   final ButtonStyle yesStyle = ElevatedButton.styleFrom(
       textStyle: const TextStyle(fontSize: 20), backgroundColor: Colors.green);
   final ButtonStyle noStyle = ElevatedButton.styleFrom(
       textStyle: const TextStyle(fontSize: 20), backgroundColor: Colors.red);
 
   String valueText = "";
-  CollarColor collarColor = CollarColor.colorChoice;
+  String breedText = "";
+  CollarColor collarColor = CollarColor.collar;
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +47,16 @@ class _ToDoDialogState extends State<ToDoDialog> {
               });
             },
             controller: _inputController,
-            decoration: const InputDecoration(hintText: "type something here"),
+            decoration: const InputDecoration(hintText: "Dog name:"),
+          ),
+          TextField(
+            onChanged: (breed) {
+              setState(() {
+                breedText = breed;
+              });
+            },
+            controller: _breedController,
+            decoration: const InputDecoration(hintText: "Dog breed:"),
           ),
           DropdownButton<CollarColor>(
               value: collarColor,
@@ -60,7 +72,6 @@ class _ToDoDialogState extends State<ToDoDialog> {
         ],
       ),
       actions: <Widget>[
-        //not sure why this isn't working
         ElevatedButton(
           key: const Key("CancelButton"),
           style: noStyle,
@@ -76,16 +87,14 @@ class _ToDoDialogState extends State<ToDoDialog> {
         ValueListenableBuilder<TextEditingValue>(
           valueListenable: _inputController,
           builder: (context, value, child) {
-            //not sure why this isn't working either
             return ElevatedButton(
               key: const Key("OKButton"),
               style: yesStyle,
-              onPressed: value.text.isNotEmpty
+              onPressed: value.text.isNotEmpty && breedText.isNotEmpty
                   ? () {
                       setState(() {
-                        //add color here too
-                        widget.onListAdded(
-                            value.text, collarColor, _inputController);
+                        widget.onListAdded(value.text, collarColor, breedText,
+                            _inputController);
                         Navigator.pop(context);
                       });
                     }
