@@ -13,6 +13,7 @@ import 'package:to_dont_list/objects/dog.dart';
 import 'package:to_dont_list/widgets/to_do_items.dart';
 
 void main() {
+  //new/modified test
   testWidgets('DogListItem has collar color as elevated button',
       (tester) async {
     await tester.pumpWidget(MaterialApp(
@@ -30,8 +31,7 @@ void main() {
     expect(buttonColor, equals(CollarColor.blue.color));
   });
 
-  // Yes, you really need the MaterialApp and Scaffold
-  testWidgets('DogListItem has a text', (tester) async {
+  testWidgets('DogListItem contains texts', (tester) async {
     await tester.pumpWidget(MaterialApp(
         home: Scaffold(
             body: DogListItem(
@@ -40,15 +40,16 @@ void main() {
                 completed: true,
                 onListChanged: (Dog dog, bool completed) {},
                 onDeleteItem: (Dog dog) {}))));
-    final textFinder = find.text('test');
 
-    // Use the `findsOneWidget` matcher provided by flutter_test to verify
-    // that the Text widgets appear exactly once in the widget tree.
-    expect(textFinder, findsOneWidget);
+    final nameFinder = find.text("Name: test,");
+    final breedFinder = find.text("Breed: testbreed");
+
+    expect(nameFinder, findsOneWidget);
+    expect(breedFinder, findsOneWidget);
   });
 
-  testWidgets(
-      'ToDoListItem has Elevated Button that increases encounters when pressed',
+  // new/modified test
+  testWidgets('DogListItem has Elevated Button that increments',
       (tester) async {
     await tester.pumpWidget(
       MaterialApp(
@@ -70,33 +71,41 @@ void main() {
     expect(find.text('2'), findsOne);
   });
 
-  testWidgets('Default ToDoList has one item', (tester) async {
-    await tester.pumpWidget(const MaterialApp(home: ToDoList()));
+  testWidgets('Default ToDogList has one item', (tester) async {
+    await tester.pumpWidget(const MaterialApp(home: ToDogList()));
 
     final listItemFinder = find.byType(DogListItem);
 
     expect(listItemFinder, findsOneWidget);
   });
 
-  testWidgets('Clicking and Typing adds item to ToDoList', (tester) async {
-    await tester.pumpWidget(const MaterialApp(home: ToDoList()));
+  testWidgets('Clicking and Typing adds to ToDogList', (tester) async {
+    await tester.pumpWidget(const MaterialApp(home: ToDogList()));
 
     expect(find.byType(TextField), findsNothing);
 
     await tester.tap(find.byType(FloatingActionButton));
-    await tester.pump(); // Pump after every action to rebuild the widgets
-    expect(find.text("name"), findsNothing);
+    await tester.pump(); // Rebuild the widgets to show the dialog.
 
-    await tester.enterText(find.byType(TextField), 'name');
+    expect(find.text("Dog name:"), findsOneWidget);
+    expect(find.text("Dog breed:"), findsOneWidget);
+
+    await tester.enterText(find.byType(TextField).first, 'name');
     await tester.pump();
     expect(find.text("name"), findsOneWidget);
+
+    await tester.enterText(find.byType(TextField).last, 'breed');
+    await tester.pump();
+
+    expect(find.text("breed"), findsOneWidget);
+
     await tester.tap(find.byKey(const Key("OKButton")));
     await tester.pump();
 
-    expect(find.text("name"), findsOneWidget);
+    expect(find.text("Name: name,"), findsOneWidget);
+    expect(find.text("Breed: breed"), findsOneWidget);
 
     final listItemFinder = find.byType(DogListItem);
-
     expect(listItemFinder, findsNWidgets(2));
   });
 

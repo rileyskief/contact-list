@@ -4,16 +4,17 @@ import 'package:to_dont_list/objects/dog.dart';
 import 'package:to_dont_list/widgets/to_do_items.dart';
 import 'package:to_dont_list/widgets/to_do_dialog.dart';
 
-class ToDoList extends StatefulWidget {
-  const ToDoList({super.key});
+class ToDogList extends StatefulWidget {
+  const ToDogList({super.key});
 
   @override
   State createState() => _ToDoListState();
 }
 
-class _ToDoListState extends State<ToDoList> {
-
-  final List<Dog> items = [Dog(name: "Fido", collar: CollarColor.red, breed: "beagle")];
+class _ToDoListState extends State<ToDogList> {
+  final List<Dog> items = [
+    Dog(name: "Fido", collar: CollarColor.red, breed: "beagle")
+  ];
   final _itemSet = <Dog>{};
 
   void _handleListChanged(Dog item, bool completed) {
@@ -44,12 +45,11 @@ class _ToDoListState extends State<ToDoList> {
     });
   }
 
-  
   void _handleNewItem(String itemText, CollarColor collarColor, String breed,
       TextEditingController textController) {
     setState(() {
       print("Adding new item");
-      
+
       Dog item = Dog(name: itemText, collar: collarColor, breed: breed);
       items.insert(0, item);
       textController.clear();
@@ -60,7 +60,7 @@ class _ToDoListState extends State<ToDoList> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text('To Dog List'),
+          title: const Text('To Dog List: A list of dogs you see'),
         ),
         body: ListView(
           padding: const EdgeInsets.symmetric(vertical: 8.0),
@@ -88,7 +88,7 @@ class _ToDoListState extends State<ToDoList> {
 void main() {
   runApp(const MaterialApp(
     title: 'To Dog List',
-    home: ToDoList(),
+    home: ToDogList(),
   ));
 }
 
