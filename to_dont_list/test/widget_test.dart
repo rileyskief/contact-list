@@ -10,24 +10,36 @@ import 'package:flutter_test/flutter_test.dart';
 
 import 'package:to_dont_list/main.dart';
 import 'package:to_dont_list/objects/dog.dart';
-import 'package:to_dont_list/objects/item.dart';
 import 'package:to_dont_list/widgets/to_do_items.dart';
 
 void main() {
-  test('Item abbreviation should be first letter', () {
-    const item = Item(name: "add more todos");
-    expect(item.abbrev(), "a");
+  testWidgets('DogListItem has collar color as elevated button',
+      (tester) async {
+    await tester.pumpWidget(MaterialApp(
+        home: Scaffold(
+            body: DogListItem(
+                dog: Dog(
+                    name: "test", collar: CollarColor.blue, breed: "testbreed"),
+                completed: true,
+                onListChanged: (Dog dog, bool completed) {},
+                onDeleteItem: (Dog dog) {}))));
+    final buttonFinder = find.byType(ElevatedButton);
+    final ElevatedButton test = tester.widget(buttonFinder);
+    final buttonColor = test.style?.backgroundColor?.resolve({});
+
+    expect(buttonColor, equals(CollarColor.blue.color));
   });
 
   // Yes, you really need the MaterialApp and Scaffold
-  testWidgets('ToDoListItem has a text', (tester) async {
+  testWidgets('DogListItem has a text', (tester) async {
     await tester.pumpWidget(MaterialApp(
         home: Scaffold(
-            body: ToDoListItem(
-                item: const Dog(name: "test"),
+            body: DogListItem(
+                dog: Dog(
+                    name: "test", collar: CollarColor.blue, breed: "testbreed"),
                 completed: true,
-                onListChanged: (Dog item, bool completed) {},
-                onDeleteItem: (Dog item) {}))));
+                onListChanged: (Dog dog, bool completed) {},
+                onDeleteItem: (Dog dog) {}))));
     final textFinder = find.text('test');
 
     // Use the `findsOneWidget` matcher provided by flutter_test to verify
@@ -35,33 +47,33 @@ void main() {
     expect(textFinder, findsOneWidget);
   });
 
-  testWidgets('ToDoListItem has a Circle Avatar with abbreviation',
+  testWidgets(
+      'ToDoListItem has Elevated Button that increases encounters when pressed',
       (tester) async {
-    await tester.pumpWidget(MaterialApp(
+    await tester.pumpWidget(
+      MaterialApp(
         home: Scaffold(
-            body: ToDoListItem(
-                item: const Dog(name: "test"),
-                completed: true,
-                onListChanged: (Dog item, bool completed) {},
-                onDeleteItem: (Dog item) {}))));
-    //doesn't abbreviate anymore, redundant
-    final abbvFinder = find.text('t');
-    final avatarFinder = find.byType(CircleAvatar);
+          body: DogListItem(
+              dog: Dog(name: "test", collar: CollarColor.blue, breed: "test"),
+              completed: true,
+              onListChanged: (Dog dog, bool completed) {},
+              onDeleteItem: (Dog dog) {}),
+        ),
+      ),
+    );
+    final buttonFinder = find.byType(ElevatedButton);
+    expect(find.text('1'), findsOneWidget);
 
-    CircleAvatar circ = tester.firstWidget(avatarFinder);
-    Text ctext = circ.child as Text;
+    await tester.tap(buttonFinder);
+    await tester.pump();
 
-    // Use the `findsOneWidget` matcher provided by flutter_test to verify
-    // that the Text widgets appear exactly once in the widget tree.
-    expect(abbvFinder, findsOneWidget);
-    expect(circ.backgroundColor, Colors.black54);
-    expect(ctext.data, "t");
+    expect(find.text('2'), findsOne);
   });
 
   testWidgets('Default ToDoList has one item', (tester) async {
     await tester.pumpWidget(const MaterialApp(home: ToDoList()));
 
-    final listItemFinder = find.byType(ToDoListItem);
+    final listItemFinder = find.byType(DogListItem);
 
     expect(listItemFinder, findsOneWidget);
   });
@@ -73,17 +85,17 @@ void main() {
 
     await tester.tap(find.byType(FloatingActionButton));
     await tester.pump(); // Pump after every action to rebuild the widgets
-    expect(find.text("hi"), findsNothing);
+    expect(find.text("name"), findsNothing);
 
-    await tester.enterText(find.byType(TextField), 'hi');
+    await tester.enterText(find.byType(TextField), 'name');
     await tester.pump();
-    expect(find.text("hi"), findsOneWidget);
+    expect(find.text("name"), findsOneWidget);
     await tester.tap(find.byKey(const Key("OKButton")));
     await tester.pump();
 
-    expect(find.text("hi"), findsOneWidget);
+    expect(find.text("name"), findsOneWidget);
 
-    final listItemFinder = find.byType(ToDoListItem);
+    final listItemFinder = find.byType(DogListItem);
 
     expect(listItemFinder, findsNWidgets(2));
   });
