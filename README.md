@@ -11,9 +11,9 @@ This app is for everyone, but especially for people who love dogs and want to re
 
 ## Images of Application:
 
-![Screenshot_16-9-2024_195411_127 0 0 1](https://github.com/user-attachments/assets/e270be24-b8df-4947-86f6-68f037fdb6b4)
+![1000006675](https://github.com/user-attachments/assets/2f349fd1-2ff1-461c-8215-8e029e75cc43)
 Depicted: Starting Screen of App
-![Screenshot_16-9-2024_195116_127 0 0 1](https://github.com/user-attachments/assets/65b39475-982d-4cd9-b823-a9c682b7af8b)
+![1000006676](https://github.com/user-attachments/assets/35a28481-796c-4784-a3ea-d7abe6b4f51a)
 Depicted: Dialog box where name, breed, and collar color is entered
-![Screenshot_16-9-2024_195037_127 0 0 1](https://github.com/user-attachments/assets/f54db0f0-07bc-43ba-8e09-e7dd54f9fbe1)
+![1000006674](https://github.com/user-attachments/assets/77cdd50e-6980-45f8-ba35-ff80e68361b0)
 Depicted: App after usage
