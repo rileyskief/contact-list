@@ -49,6 +49,7 @@ class _ToDoDialogState extends State<ToDoDialog> {
             });
           },
         ),
+      
 
         // https://stackoverflow.com/questions/52468987/how-to-turn-disabled-button-into-enabled-button-depending-on-conditions
         ValueListenableBuilder<TextEditingValue>(
@@ -69,6 +70,52 @@ class _ToDoDialogState extends State<ToDoDialog> {
             );
           },
         ),
+      ],
+    );
+  }
+  @override
+  Widget printOption(BuildContext context) {
+    return AlertDialog(
+      title: const Text('Would you like to Print?'),
+      content: TextField(
+        onChanged: (value) {
+          setState(() {
+            valueText = value;
+          });
+        },
+        controller: _inputController,
+        decoration: const InputDecoration(hintText: "type something here"), // change to yes or no, or simply print
+      ),
+      actions: <Widget>[
+        ElevatedButton(
+          key: const Key("CancelButton"),
+          style: noStyle,
+          child: const Text('Cancel'),
+          onPressed: () {
+            setState(() {
+              Navigator.pop(context);
+            });
+          },
+        ),
+      
+        // ValueListenableBuilder<TextEditingValue>(
+        //   valueListenable: _inputController,
+        //   builder: (context, value, child) {
+        //     return ElevatedButton(
+        //       key: const Key("OKButton"),
+        //       style: yesStyle,
+        //       onPressed: value.text.isNotEmpty
+        //           ? () {
+        //               setState(() {
+        //                 widget.onListAdded(valueText, _inputController);
+        //                 Navigator.pop(context);
+        //               });
+        //             }
+        //           : null,
+              // child: const Text('OK'),
+            // );
+          // },
+        // ),
       ],
     );
   }
