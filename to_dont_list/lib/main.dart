@@ -12,7 +12,7 @@ class ToDoList extends StatefulWidget {
 }
 
 class _ToDoListState extends State<ToDoList> {
-  final List<Item> items = [const Item(name: "add more todos")];
+  final List<Item> items = [const Item(name: "Name (First and Last)")];
   final _itemSet = <Item>{};
 
   void _handleListChanged(Item item, bool completed) {
@@ -56,7 +56,7 @@ class _ToDoListState extends State<ToDoList> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text('To Do List'),
+          title: const Text('Contacts'),
         ),
         body: ListView(
           padding: const EdgeInsets.symmetric(vertical: 8.0),
@@ -83,7 +83,7 @@ class _ToDoListState extends State<ToDoList> {
 
 void main() {
   runApp(const MaterialApp(
-    title: 'To Do List',
+    title: 'Contacts',
     home: ToDoList(),
   ));
 }
