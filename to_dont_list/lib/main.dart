@@ -79,19 +79,6 @@ class _ToDoListState extends State<ToDoList> {
                   });
             }));
   }
-  @override
-  Widget printOption(BuildContext context) {
-    return Scaffold(
-        floatingActionButton: FloatingActionButton(
-            child: const Icon(Icons.add),
-            onPressed: () {
-              showDialog(
-                  context: context,
-                  builder: (_) {
-                    return ToDoDialog(onListAdded: _handleNewItem);
-                  });
-            }));
-  }
 }
 
 void main() {
