@@ -9,24 +9,24 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:to_dont_list/main.dart';
-import 'package:to_dont_list/objects/item.dart';
+import 'package:to_dont_list/objects/person.dart';
 import 'package:to_dont_list/widgets/to_do_items.dart';
 
 void main() {
   test('Item abbreviation should be first letter', () {
-    const item = Item(name: "add more todos");
+    const item = Person(name: "add more todos");
     expect(item.abbrev(), "a");
   });
 
   // Yes, you really need the MaterialApp and Scaffold
-  testWidgets('ToDoListItem has a text', (tester) async {
+  testWidgets('ToDoListPerson has a text', (tester) async {
     await tester.pumpWidget(MaterialApp(
         home: Scaffold(
-            body: ToDoListItem(
-                item: const Item(name: "test"),
+            body: ToDoListPerson(
+                item: const Person(name: "test"),
                 completed: true,
-                onListChanged: (Item item, bool completed) {},
-                onDeleteItem: (Item item) {}))));
+                onListChanged: (Person item, bool completed) {},
+                onDeletePerson: (Person item) {}))));
     final textFinder = find.text('test');
 
     // Use the `findsOneWidget` matcher provided by flutter_test to verify
@@ -34,15 +34,15 @@ void main() {
     expect(textFinder, findsOneWidget);
   });
 
-  testWidgets('ToDoListItem has a Circle Avatar with abbreviation',
+  testWidgets('ToDoListPerson has a Circle Avatar with abbreviation',
       (tester) async {
     await tester.pumpWidget(MaterialApp(
         home: Scaffold(
-            body: ToDoListItem(
-                item: const Item(name: "test"),
+            body: ToDoListPerson(
+                item: const Person(name: "test"),
                 completed: true,
-                onListChanged: (Item item, bool completed) {},
-                onDeleteItem: (Item item) {}))));
+                onListChanged: (Person item, bool completed) {},
+                onDeletePerson: (Person item) {}))));
     final abbvFinder = find.text('t');
     final avatarFinder = find.byType(CircleAvatar);
 
@@ -59,9 +59,9 @@ void main() {
   testWidgets('Default ToDoList has one item', (tester) async {
     await tester.pumpWidget(const MaterialApp(home: ToDoList()));
 
-    final listItemFinder = find.byType(ToDoListItem);
+    final listPersonFinder = find.byType(ToDoListPerson);
 
-    expect(listItemFinder, findsOneWidget);
+    expect(listPersonFinder, findsOneWidget);
   });
 
   testWidgets('Clicking and Typing adds item to ToDoList', (tester) async {
@@ -81,7 +81,7 @@ void main() {
     await tester.pump();
     expect(find.text("hi"), findsOneWidget);
 
-    final listItemFinder = find.byType(ToDoListItem);
+    final listItemFinder = find.byType(ToDoListPerson);
 
     expect(listItemFinder, findsNWidgets(2));
   });

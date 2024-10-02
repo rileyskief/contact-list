@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:to_dont_list/objects/item.dart';
+import 'package:to_dont_list/objects/person.dart';
 
-typedef ToDoListChangedCallback = Function(Item item, bool completed);
-typedef ToDoListRemovedCallback = Function(Item item);
+typedef ToDoListChangedCallback = Function(Person item, bool completed);
+typedef ToDoListRemovedCallback = Function(Person item);
 
-class ToDoListItem extends StatelessWidget {
-  ToDoListItem(
+class ToDoListPerson extends StatelessWidget {
+  ToDoListPerson(
       {required this.item,
       required this.completed,
       required this.onListChanged,
-      required this.onDeleteItem})
+      required this.onDeletePerson})
       : super(key: ObjectKey(item));
 
-  final Item item;
+  final Person item;
   final bool completed;
 
   final ToDoListChangedCallback onListChanged;
-  final ToDoListRemovedCallback onDeleteItem;
+  final ToDoListRemovedCallback onDeletePerson;
 
   Color _getColor(BuildContext context) {
     // The theme depends on the BuildContext because different
@@ -46,7 +46,7 @@ class ToDoListItem extends StatelessWidget {
       },
       onLongPress: completed
           ? () {
-              onDeleteItem(item);
+              onDeletePerson(item);
             }
           : null,
       leading: CircleAvatar(
