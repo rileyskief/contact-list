@@ -14,7 +14,7 @@ import 'package:to_dont_list/widgets/to_do_items.dart';
 
 void main() {
   test('Item abbreviation should be first letter', () {
-    const item = Person(name: "add more todos");
+    const item = Person(name: "add more todos", phoneNumber: 50303);
     expect(item.abbrev(), "a");
   });
 
@@ -23,7 +23,7 @@ void main() {
     await tester.pumpWidget(MaterialApp(
         home: Scaffold(
             body: ToDoListPerson(
-                item: const Person(name: "test"),
+                item: const Person(name: "test", phoneNumber: 1003 ),
                 completed: true,
                 onListChanged: (Person item, bool completed) {},
                 onDeletePerson: (Person item) {}))));
@@ -39,7 +39,7 @@ void main() {
     await tester.pumpWidget(MaterialApp(
         home: Scaffold(
             body: ToDoListPerson(
-                item: const Person(name: "test"),
+                item: const Person(name: "test", phoneNumber: 40),
                 completed: true,
                 onListChanged: (Person item, bool completed) {},
                 onDeletePerson: (Person item) {}))));

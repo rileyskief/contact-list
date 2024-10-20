@@ -12,7 +12,8 @@ class ToDoList extends StatefulWidget {
 }
 
 class _ToDoListState extends State<ToDoList> {
-  final List<Person> items = [const Person(name: "Name (First and Last)")];
+  final List<Person> items = [const Person(name: "Riley Skief", phoneNumber: 6187919512)];
+  
   final _itemSet = <Person>{};
 
   void _handleListChanged(Person item, bool completed) {
@@ -46,7 +47,7 @@ class _ToDoListState extends State<ToDoList> {
   void _handleNewPerson(String itemText, TextEditingController textController) {
     setState(() {
       print("Adding new item");
-      Person item = Person(name: textController.text);
+      Person item = Person(name: textController.text, phoneNumber: TextField.noMaxLength);
       items.insert(0, item);
       textController.clear();
     });

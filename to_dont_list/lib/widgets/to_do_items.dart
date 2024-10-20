@@ -55,7 +55,12 @@ class ToDoListPerson extends StatelessWidget {
       ),
       title: Text(
         item.name,
-        
+  
+        style: _getTextStyle(context),
+      ),
+      subtitle: Text(
+        item.phoneNumber.toString(),
+
         style: _getTextStyle(context),
       ),
     );
