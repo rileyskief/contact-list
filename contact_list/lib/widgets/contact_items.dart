@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:to_dont_list/objects/person.dart';
 
-typedef ToDoListChangedCallback = Function(Person item, bool completed);
-typedef ToDoListRemovedCallback = Function(Person item);
+typedef ListChangedCallback = Function(Person item, bool completed);
+typedef ListRemovedCallback = Function(Person item);
 
-class ToDoListPerson extends StatelessWidget {
-  ToDoListPerson(
+class ListPerson extends StatelessWidget {
+  ListPerson(
       {required this.item,
       required this.completed,
       required this.onListChanged,
@@ -15,8 +15,8 @@ class ToDoListPerson extends StatelessWidget {
   final Person item;
   final bool completed;
 
-  final ToDoListChangedCallback onListChanged;
-  final ToDoListRemovedCallback onDeletePerson;
+  final ListChangedCallback onListChanged;
+  final ListRemovedCallback onDeletePerson;
 
   Color _getColor(BuildContext context) {
     // The theme depends on the BuildContext because different

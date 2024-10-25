@@ -1,17 +1,17 @@
 // Started with https://docs.flutter.dev/development/ui/widgets-intro
 import 'package:flutter/material.dart';
 import 'package:to_dont_list/objects/person.dart';
-import 'package:to_dont_list/widgets/to_do_items.dart';
-import 'package:to_dont_list/widgets/to_do_dialog.dart';
+import 'package:to_dont_list/widgets/contact_items.dart';
+import 'package:to_dont_list/widgets/contact_dialog.dart';
 
-class ToDoList extends StatefulWidget {
-  const ToDoList({super.key});
+class ContactList extends StatefulWidget {
+  const ContactList({super.key});
 
   @override
-  State createState() => _ToDoListState();
+  State createState() => _ContactListState();
 }
 
-class _ToDoListState extends State<ToDoList> {
+class _ContactListState extends State<ContactList> {
   final List<Person> items = [const Person(name: "Riley Skief", phoneNumber: 6187919512)];
   
   final _itemSet = <Person>{};
@@ -62,7 +62,7 @@ class _ToDoListState extends State<ToDoList> {
         body: ListView(
           padding: const EdgeInsets.symmetric(vertical: 8.0),
           children: items.map((item) {
-            return ToDoListPerson(
+            return ListPerson(
               item: item,
               completed: _itemSet.contains(item),
               onListChanged: _handleListChanged,
@@ -76,7 +76,7 @@ class _ToDoListState extends State<ToDoList> {
               showDialog(
                   context: context,
                   builder: (_) {
-                    return ToDoDialog(onListAdded: _handleNewPerson);
+                    return ContactDialog(onListAdded: _handleNewPerson);
                   });
             }));
   }
@@ -85,6 +85,6 @@ class _ToDoListState extends State<ToDoList> {
 void main() {
   runApp(const MaterialApp(
     title: 'Contacts',
-    home: ToDoList(),
+    home: ContactList(),
   ));
 }

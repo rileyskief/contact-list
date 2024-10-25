@@ -10,11 +10,11 @@ import 'package:flutter_test/flutter_test.dart';
 
 import 'package:to_dont_list/main.dart';
 import 'package:to_dont_list/objects/person.dart';
-import 'package:to_dont_list/widgets/to_do_items.dart';
+import 'package:to_dont_list/widgets/contact_items.dart';
 
 void main() {
   test('Item abbreviation should be first letter', () {
-    const item = Person(name: "add more todos", phoneNumber: 50303);
+    const item = Person(name: "add more people", phoneNumber: 50303);
     expect(item.abbrev(), "a");
   });
 
@@ -22,7 +22,7 @@ void main() {
   testWidgets('Contact Person has a text', (tester) async {
     await tester.pumpWidget(MaterialApp(
         home: Scaffold(
-            body: ToDoListPerson(
+            body: ListPerson(
                 item: const Person(name: "test", phoneNumber: 1003 ),
                 completed: true,
                 onListChanged: (Person item, bool completed) {},
@@ -38,7 +38,7 @@ void main() {
       (tester) async {
     await tester.pumpWidget(MaterialApp(
         home: Scaffold(
-            body: ToDoListPerson(
+            body: ListPerson(
                 item: const Person(name: "test", phoneNumber: 40),
                 completed: true,
                 onListChanged: (Person item, bool completed) {},
@@ -56,16 +56,16 @@ void main() {
     expect(ctext.data, "t");
   });
 
-  testWidgets('Default ToDoList has one item', (tester) async {
-    await tester.pumpWidget(const MaterialApp(home: ToDoList()));
+  testWidgets('Default List has one item', (tester) async {
+    await tester.pumpWidget(const MaterialApp(home: ContactList()));
 
-    final listPersonFinder = find.byType(ToDoListPerson);
+    final listPersonFinder = find.byType(ListPerson);
 
     expect(listPersonFinder, findsOneWidget);
   });
 
-  testWidgets('Clicking and Typing adds item to ToDoList', (tester) async {
-    await tester.pumpWidget(const MaterialApp(home: ToDoList()));
+  testWidgets('Clicking and Typing adds item to List', (tester) async {
+    await tester.pumpWidget(const MaterialApp(home: ContactList()));
 
     expect(find.byType(TextField), findsNothing);
 
@@ -81,7 +81,7 @@ void main() {
     await tester.pump();
     expect(find.text("hi"), findsOneWidget);
 
-    final listItemFinder = find.byType(ToDoListPerson);
+    final listItemFinder = find.byType(ListPerson);
 
     expect(listItemFinder, findsNWidgets(2));
   });

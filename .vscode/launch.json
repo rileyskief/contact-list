@@ -7,20 +7,20 @@
         
         {
             "name": "to_dont_list",
-            "cwd": "to_dont_list",
+            "cwd": "contact_list",
             "request": "launch",
             "type": "dart"
         },
         {
             "name": "to_dont_list (profile mode)",
-            "cwd": "to_dont_list",
+            "cwd": "contact_list",
             "request": "launch",
             "type": "dart",
             "flutterMode": "profile"
         },
         {
             "name": "to_dont_list (release mode)",
-            "cwd": "to_dont_list",
+            "cwd": "contact_list",
             "request": "launch",
             "type": "dart",
             "flutterMode": "release"
