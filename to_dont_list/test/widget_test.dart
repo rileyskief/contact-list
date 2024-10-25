@@ -19,7 +19,7 @@ void main() {
   });
 
   // Yes, you really need the MaterialApp and Scaffold
-  testWidgets('ToDoListPerson has a text', (tester) async {
+  testWidgets('Contact Person has a text', (tester) async {
     await tester.pumpWidget(MaterialApp(
         home: Scaffold(
             body: ToDoListPerson(
@@ -34,7 +34,7 @@ void main() {
     expect(textFinder, findsOneWidget);
   });
 
-  testWidgets('ToDoListPerson has a Circle Avatar with abbreviation',
+  testWidgets('Contact Person has a Circle Avatar with abbreviation',
       (tester) async {
     await tester.pumpWidget(MaterialApp(
         home: Scaffold(
