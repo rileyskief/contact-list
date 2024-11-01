@@ -13,7 +13,7 @@ enum CollarColor {
   const CollarColor(this.color);
   final Color color;
 }
-
+//testing new addition
 class Dog {
   Dog({required this.name, required this.collar, required this.breed});
 
