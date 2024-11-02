@@ -41,6 +41,7 @@ class _DogListItemState extends State<DogListItem> {
     );
   }
 
+
   @override
   Widget build(BuildContext context) {
     return ListTile(

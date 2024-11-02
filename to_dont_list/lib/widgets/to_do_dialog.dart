@@ -47,7 +47,7 @@ class _ToDoDialogState extends State<ToDoDialog> {
               });
             },
             controller: _inputController,
-            decoration: const InputDecoration(hintText: "Dog name:"),
+            decoration: const InputDecoration(hintText: "Dog Name:"),
           ),
           TextField(
             onChanged: (breed) {
@@ -56,7 +56,7 @@ class _ToDoDialogState extends State<ToDoDialog> {
               });
             },
             controller: _breedController,
-            decoration: const InputDecoration(hintText: "Dog breed:"),
+            decoration: const InputDecoration(hintText: "Dog Breed:"),
           ),
           DropdownButton<CollarColor>(
               value: collarColor,
