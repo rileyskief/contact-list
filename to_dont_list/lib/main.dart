@@ -1,4 +1,6 @@
 // Started with https://docs.flutter.dev/development/ui/widgets-intro
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:to_dont_list/objects/dog.dart';
 import 'package:to_dont_list/widgets/to_do_items.dart';
@@ -12,47 +14,34 @@ class ToDogList extends StatefulWidget {
   State createState() => _ToDoListState();
 }
 
-/////////////////////// what I've added
+// /////////////////////// what I've added
 void main() {
-  runApp(const RunMyApp());
+  runApp(const MaterialApp(
+    title: 'To Dog List',
+    home: ToDogList(),
+  ));
 }
 
 
-// https://www.geeksforgeeks.org/flutter-set-background-image/ to help learn how to set image as background
+// received help from https://www.geeksforgeeks.org/flutter-set-background-image/ to learn how to set image as background
 
 class RunMyApp extends StatelessWidget {
   const RunMyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // materialApp with debugbanner false
-    return MaterialApp( 
-      // theme of the app
-      theme: ThemeData(primarySwatch: Colors.green), 
-      debugShowCheckedModeBanner: false,
-      // scaffold with app
-      home: Scaffold( 
+      return Scaffold( 
         // appbat sets the title of the app
         appBar: AppBar( 
           title: const Text('To Dog List'),
         ), 
         // Decoratedbox which takes the 
         // decoration and child property
-        body: const DecoratedBox( 
-          // BoxDecoration takes the image
-          decoration: BoxDecoration( 
-            // Image set to background of the body
-            image: DecorationImage( 
-                image: AssetImage("assets/images/pawprints.jpg"), fit: BoxFit.cover),
-          ),
-          child: Center( 
-              // flutter logo that will shown 
-              // above the background image
-              child: FlutterLogo( 
-            size: 0,
-          )),
-        ),
-      ),
+        body: Image(
+          image: FileImage(File("assets/images/pawprints.jpg"))
+        )
+        
+    
     );
   }
 }
@@ -112,7 +101,12 @@ class _ToDoListState extends State<ToDogList> {
         appBar: AppBar(
           title: const Text('To Dog List: A List of Dogs You See'),
         ),
-        body: ListView(
+        body: Stack(
+          children: [
+        const Image(
+          image: AssetImage("assets/images/pawprints.jpg")
+        ),
+          ListView(
           padding: const EdgeInsets.symmetric(vertical: 8.0),
           children: items.map((dog) {
             return DogListItem(
@@ -122,7 +116,13 @@ class _ToDoListState extends State<ToDogList> {
               onDeleteItem: _handleDeleteItem,
             );
           }).toList(),
+        ),],
+        
+        
+
         ),
+        
+        
         floatingActionButton: FloatingActionButton(
             child: const Icon(Icons.add),
             onPressed: () {
@@ -135,7 +135,7 @@ class _ToDoListState extends State<ToDogList> {
   }
 }
 
-// received help from https://www.geeksforgeeks.org/flutter-set-background-image/ to learn how to set image as background
+
 // void main() {
 //   runApp(const MaterialApp(
 //     title: 'To Dog List',
