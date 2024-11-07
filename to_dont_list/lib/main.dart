@@ -14,41 +14,19 @@ class ToDogList extends StatefulWidget {
   State createState() => _ToDoListState();
 }
 
-// /////////////////////// what I've added
 void main() {
   runApp(const MaterialApp(
     title: 'To Dog List',
     home: ToDogList(),
+    // theme: TextTheme.apply
   ));
 }
 
 
 // received help from https://www.geeksforgeeks.org/flutter-set-background-image/ to learn how to set image as background
 
-class RunMyApp extends StatelessWidget {
-  const RunMyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-      return Scaffold( 
-        // appbat sets the title of the app
-        appBar: AppBar( 
-          title: const Text('To Dog List'),
-        ), 
-        // Decoratedbox which takes the 
-        // decoration and child property
-        body: Image(
-          image: FileImage(File("assets/images/pawprints.jpg"))
-        )
-        
-    
-    );
-  }
-}
 
 
-
-/////////////////////
 
 class _ToDoListState extends State<ToDogList> {
   final List<Dog> items = [
@@ -99,15 +77,23 @@ class _ToDoListState extends State<ToDogList> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text('To Dog List: A List of Dogs You See'),
+          iconTheme: IconThemeData(
+            color: Colors.white
+          ),
+          title: const Text('To Dog List: A List of Dogs You See', style: TextStyle(
+            color: Color.fromARGB(255, 255, 194, 194)
+          )),
+          backgroundColor: Colors.pink,
         ),
         body: Stack(
           children: [
         const Image(
-          image: AssetImage("assets/images/pawprints.jpg")
+          image: AssetImage("assets/images/paw_wallpaper.jpg"),
+          fit: BoxFit.cover,
         ),
           ListView(
           padding: const EdgeInsets.symmetric(vertical: 8.0),
+          
           children: items.map((dog) {
             return DogListItem(
               dog: dog,
@@ -117,9 +103,6 @@ class _ToDoListState extends State<ToDogList> {
             );
           }).toList(),
         ),],
-        
-        
-
         ),
         
         
@@ -136,12 +119,7 @@ class _ToDoListState extends State<ToDogList> {
 }
 
 
-// void main() {
-//   runApp(const MaterialApp(
-//     title: 'To Dog List',
-//     home: ToDogList(),
-//   ));
-// }
+
 
 
 

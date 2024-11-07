@@ -19,5 +19,11 @@ flutter:
   uses-material-design: true
 
   assets:
-  - assets/images/pawprints.jpg
+  - assets/images/paw_wallpaper.jpg
 
+
+  # fonts:
+    # - asset: fonts/cool_font/atop/atop2.ttf
+    # style: const TextStyle(color: Color.fromARGB(255, 63, 129, 160))
+
+        

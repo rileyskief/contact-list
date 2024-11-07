@@ -41,6 +41,7 @@ class _ToDoDialogState extends State<ToDoDialog> {
       content: Column(
         children: [
           TextField(
+            style: const TextStyle(color: Color.fromARGB(255, 63, 129, 160)),
             onChanged: (value) {
               setState(() {
                 valueText = value;
@@ -50,6 +51,7 @@ class _ToDoDialogState extends State<ToDoDialog> {
             decoration: const InputDecoration(hintText: "Dog Name:"),
           ),
           TextField(
+            style: const TextStyle(color: Color.fromARGB(255, 63, 129, 160)),
             onChanged: (breed) {
               setState(() {
                 breedText = breed;
