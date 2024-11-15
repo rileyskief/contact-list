@@ -14,7 +14,7 @@ import 'package:to_dont_list/widgets/contact_items.dart';
 
 void main() {
   test('Item abbreviation should be first letter', () {
-    const item = Person(name: "add more people", phoneNumber: 50303);
+    Person item = Person(name: "add more people", phoneNumber: 50303, favorite: false);
     expect(item.abbrev(), "a");
   });
 
@@ -23,7 +23,7 @@ void main() {
     await tester.pumpWidget(MaterialApp(
         home: Scaffold(
             body: ListPerson(
-                item: const Person(name: "test", phoneNumber: 1003 ),
+                item: Person(name: "test", phoneNumber: 1003, favorite: false),
                 completed: true,
                 onListChanged: (Person item, bool completed) {},
                 onDeletePerson: (Person item) {}))));
@@ -39,7 +39,7 @@ void main() {
     await tester.pumpWidget(MaterialApp(
         home: Scaffold(
             body: ListPerson(
-                item: const Person(name: "test", phoneNumber: 40),
+                item: Person(name: "test", phoneNumber: 40, favorite: false),
                 completed: true,
                 onListChanged: (Person item, bool completed) {},
                 onDeletePerson: (Person item) {}))));
