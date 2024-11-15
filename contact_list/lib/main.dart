@@ -12,7 +12,7 @@ class ContactList extends StatefulWidget {
 }
 
 class _ContactListState extends State<ContactList> {
-  final List<Person> items = [const Person(name: "Riley Skief", phoneNumber: 6187919512)];
+  final List<Person> items = [Person(name: "Riley Skief", phoneNumber: 6187919512, favorite: false),];
   
   final _itemSet = <Person>{};
 
@@ -47,7 +47,7 @@ class _ContactListState extends State<ContactList> {
   void _handleNewPerson(String itemText, TextEditingController textController) {
     setState(() {
       print("Adding new item");
-      Person item = Person(name: textController.text, phoneNumber: TextField.noMaxLength);
+      Person item = Person(name: textController.text, phoneNumber: TextField.noMaxLength, favorite: false);
       items.insert(0, item);
       textController.clear();
     });
