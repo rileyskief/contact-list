@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
-typedef ListAddedCallback = Function(
-    String value, TextEditingController textConroller);
+typedef ListAddedCallback = Function(String name, String phoneNumber);
 
 class ContactDialog extends StatefulWidget {
   const ContactDialog({
@@ -16,16 +16,30 @@ class ContactDialog extends StatefulWidget {
 }
 
 class _ContactDialogState extends State<ContactDialog> {
-  // Dialog with text from https://www.appsdeveloperblog.com/alert-dialog-with-a-text-field-in-flutter/
-  final TextEditingController _inputController = TextEditingController();
-  final TextEditingController _inputController2 = TextEditingController();
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _phoneController = TextEditingController();
   final ButtonStyle yesStyle = ElevatedButton.styleFrom(
       textStyle: const TextStyle(fontSize: 20), backgroundColor: Colors.green);
   final ButtonStyle noStyle = ElevatedButton.styleFrom(
       textStyle: const TextStyle(fontSize: 20), backgroundColor: Colors.red);
 
-  String valueText = "";
-  String valueText2 = "";
+  String nameText = "";
+  String phoneText = "";
+
+  String _formatPhoneNumber(String text) {
+    // Remove all non-digit characters
+    final digitsOnly = text.replaceAll(RegExp(r'[^\d]'), '');
+    
+    // Format as XXX-XXX-XXXX
+    if (digitsOnly.length >= 10) {
+      return '${digitsOnly.substring(0, 3)}-${digitsOnly.substring(3, 6)}-${digitsOnly.substring(6, 10)}';
+    } else if (digitsOnly.length >= 6) {
+      return '${digitsOnly.substring(0, 3)}-${digitsOnly.substring(3, 6)}-${digitsOnly.substring(6)}';
+    } else if (digitsOnly.length >= 3) {
+      return '${digitsOnly.substring(0, 3)}-${digitsOnly.substring(3)}';
+    }
+    return digitsOnly;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,27 +49,37 @@ class _ContactDialogState extends State<ContactDialog> {
         mainAxisSize: MainAxisSize.min,
         children: [
           TextField(
-        onChanged: (value) {
-          setState(() {
-            valueText = value;
-          });
-        },
-        controller: _inputController,
-        decoration: const InputDecoration(hintText: "Name (First and Last)"),
+            onChanged: (value) {
+              setState(() {
+                nameText = value;
+              });
+            },
+            controller: _nameController,
+            decoration: const InputDecoration(hintText: "Name (First and Last)"),
+          ),
+          TextField(
+            onChanged: (value) {
+              final formatted = _formatPhoneNumber(value);
+              setState(() {
+                phoneText = formatted;
+                if (formatted != value) {
+                  _phoneController.value = TextEditingValue(
+                    text: formatted,
+                    selection: TextSelection.collapsed(offset: formatted.length),
+                  );
+                }
+              });
+            },
+            controller: _phoneController,
+            keyboardType: TextInputType.phone,
+            maxLength: 12, // XXX-XXX-XXXX
+            decoration: const InputDecoration(
+              hintText: "Phone Number",
+              counterText: "",
+            ),
+          ),
+        ],
       ),
-      TextField(
-        onChanged: (value2) {
-          setState(() {
-            valueText2 = value2;
-          });
-        },
-        controller: _inputController2,
-        decoration: const InputDecoration(hintText: "Phone Number"),
-      ),
-
-        ],),
-      
-      
       actions: <Widget>[
         ElevatedButton(
           key: const Key("CancelButton"),
@@ -67,23 +91,28 @@ class _ContactDialogState extends State<ContactDialog> {
             });
           },
         ),
-      
-        // https://stackoverflow.com/questions/52468987/how-to-turn-disabled-button-into-enabled-button-depending-on-conditions
         ValueListenableBuilder<TextEditingValue>(
-          valueListenable: _inputController,
-          builder: (context, value, child) {
-            return ElevatedButton(
-              key: const Key("OKButton"),
-              style: yesStyle,
-              onPressed: value.text.isNotEmpty
-                  ? () {
-                      setState(() {
-                        widget.onListAdded(valueText, _inputController);
-                        Navigator.pop(context);
-                      });
-                    }
-                  : null,
-              child: const Text('OK'),
+          valueListenable: _nameController,
+          builder: (context, nameValue, child) {
+            return ValueListenableBuilder<TextEditingValue>(
+              valueListenable: _phoneController,
+              builder: (context, phoneValue, child) {
+                final isValid = nameValue.text.isNotEmpty && 
+                              phoneValue.text.replaceAll(RegExp(r'[^\d]'), '').length == 10;
+                return ElevatedButton(
+                  key: const Key("OKButton"),
+                  style: yesStyle,
+                  onPressed: isValid
+                      ? () {
+                          setState(() {
+                            widget.onListAdded(nameText, phoneText);
+                            Navigator.pop(context);
+                          });
+                        }
+                      : null,
+                  child: const Text('OK'),
+                );
+              },
             );
           },
         ),
