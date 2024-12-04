@@ -1,4 +1,3 @@
-// Started with https://docs.flutter.dev/development/ui/widgets-intro
 import 'package:flutter/material.dart';
 import 'package:to_dont_list/objects/person.dart';
 import 'package:to_dont_list/widgets/contact_items.dart';
@@ -12,18 +11,14 @@ class ContactList extends StatefulWidget {
 }
 
 class _ContactListState extends State<ContactList> {
-  final List<Person> items = [Person(name: "Riley Skief", phoneNumber: 6187919512, favorite: false),];
+  final List<Person> items = [
+    Person(name: "Riley Skief", phoneNumber: "618-791-9512", favorite: false),
+  ];
   
   final _itemSet = <Person>{};
 
   void _handleListChanged(Person item, bool completed) {
     setState(() {
-      // When a user changes what's in the list, you need
-      // to change _itemSet inside a setState call to
-      // trigger a rebuild.
-      // The framework then calls build, below,
-      // which updates the visual appearance of the app.
-
       items.remove(item);
       if (!completed) {
         print("Completing");
@@ -44,12 +39,15 @@ class _ContactListState extends State<ContactList> {
     });
   }
 
-  void _handleNewPerson(String itemText, TextEditingController textController) {
+  void _handleNewPerson(String name, String phoneNumber) {
     setState(() {
       print("Adding new item");
-      Person item = Person(name: textController.text, phoneNumber: TextField.noMaxLength, favorite: false);
+      Person item = Person(
+        name: name,
+        phoneNumber: phoneNumber,
+        favorite: false,
+      );
       items.insert(0, item);
-      textController.clear();
     });
   }
 
